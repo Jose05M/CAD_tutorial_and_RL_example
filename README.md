@@ -1,6 +1,25 @@
 # Flatland Reinforcement Learning Tutorial using ROS 2
 
-The [previous tutorial](https://github.com/FilipeAlmeidaFEUP/ros2_teleopkeys_tutorial) focused on explaining how to use ROS 2 and Flatland to create a robot and control it. In this tutorial you will learn how to use Reinforcement Learning (RL) inside the same setup to teach the robot how to perform a simple task. The packages used for the RL algorithms are the [Stable-Baselines3](https://stable-baselines3.readthedocs.io/en/master/) and OpenAI's [Gym](https://www.gymlibrary.dev/).
+The [previous tutorial](https://github.com/FilipeAlmeidaFEUP/ros2_teleopkeys_tutorial) focused on explaining how to use ROS 2 and Flatland to create a robot and control it. In this tutorial, you will learn how to use Reinforcement Learning (RL) inside the same setup to teach the robot how to perform a simple task. The packages used for the RL algorithms are the [Stable-Baselines3](https://stable-baselines3.readthedocs.io/en/master/) and OpenAI's [Gym](https://www.gymlibrary.dev/).
+
+This tutorial was developed alongside a scientific publication ([link](https://www.researchgate.net/publication/380135583_An_Educational_Kit_for_Simulated_Robot_Learning_in_ROS_2)). If you found this tutorial useful and helpful for your robotics project, we would be grateful if you include the citation below. Thank you!
+
+(IEEE citation format)
+```
+F. Almeida, G. Leão, A. Sousa, “An Educational Kit for Simulated Robot Learning in ROS 2”, Iberian Robotics Conference, pp. 513-525, 2023.
+```
+
+(Bibtex citation)
+```
+@inproceedings{almeida2023educational,
+  title={An Educational Kit for Simulated Robot Learning in ROS 2},
+  author={Almeida, Filipe and Le{\~a}o, Gon{\c{c}}alo and Sousa, Armando},
+  booktitle={Iberian Robotics conference},
+  pages={513--525},
+  year={2023},
+  publisher={Springer}
+}
+```
 
 ## First Run
 
@@ -42,7 +61,7 @@ The robot is currently using the Proximal Policy Optimization (PPO) algorithm to
 The target area is represented by the green circle and, every time the task is restarted, the initial and final positions swap so the robot learns how to turn to both the left and the right. The task is restarted if it fails if there are any collisions, if it takes too much time or if it succeeds (reaches the end).
 
 These are all the components in the world and how they changed from the previous tutorial:
-- Map: now is a simpler layout, representing a hallway with a 90º turn. Same configuration with a different [image](world/turn.png).
+- Map: now has a simpler layout, representing a hallway with a 90º turn. Same configuration with a different [image](world/turn.png).
 - SERP robot model with LiDAR: this model is exactly the same as before.
 - End Beacon: new model added to detect if the SERP robot reached the end. It's represented by a green circle and its body has no collision with any other component. 
 - End Beacon LiDAR: laser plugin inside the end beacon model that ignores walls and only detects the SERP robot. The smallest value read is the distance from the robot to the end and, if below a threshold, the target area was reached.
