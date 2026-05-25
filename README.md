@@ -100,7 +100,7 @@ Overall, PPO achieved better final performance and more successful learning beha
 
 ## LEGO Piece CAD Model
 
-As part of the activity, a simple LEGO piece was modeled in CAD by following the tutorial showed in class. The activity focused on practicing basic CAD operations such as sketching, dimensions, extrusion, and feature creation.
+As part of the activity, a simple LEGO piece was modeled in CAD by following the tutorial shown in class. The activity focused on practicing basic CAD operations such as sketching, dimensions, extrusion, and feature creation.
 
 The process started by defining the parameters and dimensions used for each sketch. First, the base rectangle of the LEGO piece was created, and then the stud feature was added. After that, a stud pattern was generated according to the dimensions of the rectangle to complete the LEGO design.
 
