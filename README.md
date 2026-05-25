@@ -20,6 +20,7 @@ ros2 launch serp_rl serp_rl.launch.py
 ## TensorBoard Monitoring
 
 ```bash
+cd results
 tensorboard --logdir tensorboard_logs
 ```
 
