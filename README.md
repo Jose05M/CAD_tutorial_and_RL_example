@@ -48,13 +48,37 @@ agent.save("models/ppo")
 agent.save("models/dqn")
 ```
 
-## Results
+# Results
 
-During testing, PPO achieved more stable learning behavior and reached positive reward values, while DQN explored the environment faster but maintained mostly negative rewards during the tested training time.
+All training results and evidence were stored inside the `results/` folder.
 
-The collected evidence includes:
-- Training logs
-- TensorBoard reward curves
-- Saved models
-- Evaluation accuracy
-- Simulation screenshots
+## Included Evidence
+
+- `ppo_log.txt` and `dqn_log.txt`
+  - Terminal training logs for both algorithms.
+  - Include rewards, timesteps, episode information, and evaluation accuracy.
+
+- `graphs/`
+  - TensorBoard screenshots showing reward evolution and training metrics for PPO and DQN.
+
+- `tensorboard_logs/`
+  - Raw TensorBoard event files generated during training.
+
+- `models/`
+  - Saved trained models:
+    - `ppo.zip`
+    - `dqn.zip`
+
+## Observed Behavior
+
+Two reinforcement learning algorithms were tested:
+- PPO (Proximal Policy Optimization)
+- DQN (Deep Q-Network)
+
+Both algorithms were trained in the same Flatland environment using discrete navigation actions.
+
+During training:
+- PPO achieved more stable learning behavior and eventually reached positive reward values.
+- DQN explored the environment faster but maintained mostly negative rewards during the tested training time.
+
+The TensorBoard reward curves show the evolution of the learning process for both algorithms throughout training and evaluation.
