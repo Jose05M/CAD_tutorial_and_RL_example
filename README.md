@@ -95,3 +95,19 @@ DQN also showed more uniform behavior between runs, but it did not achieve the p
 ### Comparison
 
 Overall, PPO achieved better final performance and more successful learning behavior in this navigation task. PPO was able to reach positive rewards, indicating successful task completion more frequently, while DQN mainly reduced negative rewards without fully converging to successful navigation behavior during the tested training duration.
+
+# CAD Tutorial
+
+## LEGO Piece CAD Model
+
+As part of the activity, a simple LEGO piece was modeled in CAD by following the tutorial showed in class. The activity focused on practicing basic CAD operations such as sketching, dimensions, extrusion, and feature creation.
+
+The process started by defining the parameters and dimensions used for each sketch. First, the base rectangle of the LEGO piece was created, and then the stud feature was added. After that, a stud pattern was generated according to the dimensions of the rectangle to complete the LEGO design.
+
+The `CAD_tutorial/` folder includes:
+- The CAD model exported as an `.stl` file
+- A screenshot/render of the final LEGO piece design
+
+## CAD Visualization
+
+![CAD Model](CAD_tutorial/design.jpeg)
