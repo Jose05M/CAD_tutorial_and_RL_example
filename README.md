@@ -76,10 +76,22 @@ Two reinforcement learning algorithms were tested:
 - PPO (Proximal Policy Optimization)
 - DQN (Deep Q-Network)
 
-Both algorithms were trained in the same Flatland environment using discrete navigation actions.
+The PPO and DQN algorithms showed different learning behaviors during training.
 
-During training:
-- PPO achieved more stable learning behavior and eventually reached positive reward values.
-- DQN explored the environment faster but maintained mostly negative rewards during the tested training time.
+### PPO Results
 
-The TensorBoard reward curves show the evolution of the learning process for both algorithms throughout training and evaluation.
+![PPO Reward Curve](results/graphs/ppo/ep_rew_mean.png)
+The PPO reward curves showed more stable learning behavior throughout training. Some PPO runs gradually increased from negative rewards to strongly positive reward values, reaching values above 250. This indicates that the agent successfully learned how to navigate the environment, avoid collisions, and reach the target more consistently.
+
+Although some PPO runs remained negative, the best-performing runs demonstrated clear learning improvement and better final performance overall.
+
+### DQN Results
+
+![DQN Reward Curve](results/graphs/dqn/ep_rew_mean.png)
+The DQN reward curves showed faster initial changes in reward values, but all runs remained in the negative reward region during the tested training time. The rewards improved gradually from approximately -140 to around -100, showing that the agent was learning some navigation behavior, but it still struggled with collisions and unsuccessful episodes.
+
+DQN also showed more uniform behavior between runs, but it did not achieve the positive reward values reached by PPO.
+
+### Comparison
+
+Overall, PPO achieved better final performance and more successful learning behavior in this navigation task. PPO was able to reach positive rewards, indicating successful task completion more frequently, while DQN mainly reduced negative rewards without fully converging to successful navigation behavior during the tested training duration.
