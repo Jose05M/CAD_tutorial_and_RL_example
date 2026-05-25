@@ -270,7 +270,7 @@ class SerpControllerEnv(Node, gym.Env):
         # Check environment compatibility
         check_env(self, warn=True)
 
-        # Create agent
+        # Create agent: comentar/descomentar de acuerdo al agente a utilizar (PPO o DQN)
         #agent = PPO("MlpPolicy", self, verbose=1, tensorboard_log="./tensorboard_logs/ppo/")
         agent = DQN("MlpPolicy", self, verbose=1, tensorboard_log="./tensorboard_logs/dqn/")
 
@@ -299,6 +299,7 @@ class SerpControllerEnv(Node, gym.Env):
             accuracy = successful_episodes / n_test_episodes
             self.get_logger().info(f"Testing finished. Accuracy: {accuracy}")
 
+            #Save model: comentar/descomentar de acuerdo al agente a utilizar (PPO o DQN)
             #agent.save("src/ros2_flatland_rl_tutorial/models/ppo")
             agent.save("src/ros2_flatland_rl_tutorial/models/dqn")
 
