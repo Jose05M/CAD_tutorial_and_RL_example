@@ -15,6 +15,7 @@ def generate_launch_description():
     show_viz = LaunchConfiguration("show_viz")
     viz_pub_rate = LaunchConfiguration("viz_pub_rate")
     use_sim_time = LaunchConfiguration("use_sim_time")
+    algorithm = LaunchConfiguration("algorithm")
 
     ld = LaunchDescription(
         [
@@ -30,6 +31,9 @@ def generate_launch_description():
             DeclareLaunchArgument(name="show_viz", default_value="true"),
             DeclareLaunchArgument(name="viz_pub_rate", default_value="30.0"),
             DeclareLaunchArgument(name="use_sim_time", default_value="true"),
+            # RL algorithm used by the serp_rl node. One of: "ppo", "dqn". Example:
+            #   ros2 launch serp_rl serp_rl.launch.py algorithm:=ppo
+            DeclareLaunchArgument(name="algorithm", default_value="dqn"),
 
             SetEnvironmentVariable(name="ROSCONSOLE_FORMAT", value="[${severity} ${time} ${logger}]: ${message}"),
 
@@ -56,6 +60,7 @@ def generate_launch_description():
                 package="serp_rl",
                 executable="serp_rl",
                 output="screen",
+                parameters=[{"algorithm": algorithm}],
             ),
 
             # maps
