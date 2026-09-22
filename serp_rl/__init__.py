@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import os
 import time
 import threading
 import numpy as np
@@ -22,9 +23,19 @@ from stable_baselines3.common.env_checker import check_env
 class SerpControllerEnv(Node, gym.Env):
     metadata = {"render_modes": []}
 
+    ALGORITHMS = {"ppo": PPO, "dqn": DQN}
+
     def __init__(self) -> None:
         Node.__init__(self, "SerpControllerEnv")
         gym.Env.__init__(self)
+
+        self.declare_parameter("algorithm", "dqn")
+        algorithm = self.get_parameter("algorithm").get_parameter_value().string_value.lower()
+        if algorithm not in self.ALGORITHMS:
+            raise ValueError(
+                f"Unsupported algorithm '{algorithm}'. Choose one of: {sorted(self.ALGORITHMS)}"
+            )
+        self.algorithm = algorithm
 
         # Predefined speed for the robot
         linear_speed = 0.5
@@ -270,9 +281,21 @@ class SerpControllerEnv(Node, gym.Env):
         # Check environment compatibility
         check_env(self, warn=True)
 
-        # Create agent: comentar/descomentar de acuerdo al agente a utilizar (PPO o DQN)
-        #agent = PPO("MlpPolicy", self, verbose=1, tensorboard_log="./tensorboard_logs/ppo/")
-        agent = DQN("MlpPolicy", self, verbose=1, tensorboard_log="./tensorboard_logs/dqn/")
+        # All training artifacts are written under results/
+        results_dir = "src/ros2_flatland_rl_tutorial/results"
+        models_dir = f"{results_dir}/models"
+        tensorboard_dir = f"{results_dir}/tensorboard_logs/{self.algorithm}"
+        os.makedirs(models_dir, exist_ok=True)
+        os.makedirs(tensorboard_dir, exist_ok=True)
+
+        # Create agent for the algorithm selected via the "algorithm" ROS param
+        agent_cls = self.ALGORITHMS[self.algorithm]
+        agent = agent_cls(
+            "MlpPolicy",
+            self,
+            verbose=1,
+            tensorboard_log=tensorboard_dir,
+        )
 
         min_accuracy = 0.8
         accuracy = 0.0
@@ -299,9 +322,7 @@ class SerpControllerEnv(Node, gym.Env):
             accuracy = successful_episodes / n_test_episodes
             self.get_logger().info(f"Testing finished. Accuracy: {accuracy}")
 
-            #Save model: comentar/descomentar de acuerdo al agente a utilizar (PPO o DQN)
-            #agent.save("src/ros2_flatland_rl_tutorial/models/ppo")
-            agent.save("src/ros2_flatland_rl_tutorial/models/dqn")
+            agent.save(f"{models_dir}/{self.algorithm}")
 
             training_iterations += 1
 
